@@ -6,11 +6,11 @@ This API provides endpoints to manage a library system, allowing users to perfor
 
 ### 1. Clone the Repository
 
-git clone https://github.com/your/repository.git
+git clone https://github.com/amitverma202/Go-CRUD-Project.git
 
 ### 2. Navigate to the Project Directory
 
-cd library-management-api
+cd Simple-Library-Project
 
 ### 3. Install Dependencies
 
