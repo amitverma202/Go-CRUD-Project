@@ -1,137 +1,83 @@
-API Documentation
-=================
+# Library Management API
 
-1. Overview
------------
-This API provides endpoints to manage a library system, allowing users to perform CRUD operations on books.
+This API provides endpoints to manage a Simple library management system, allowing users to perform CRUD operations on books.
 
-#Base URL
-The base URL for accessing the API is `http://localhost:8080`.
+## Setup
 
-#Authentication
-This API does not require authentication.
+### 1. Clone the Repository
 
-#Endpoints
------------
+git clone https://github.com/amitverma202/Go-CRUD-Project.git
 
-## Get All Books
-- **Endpoint:** `GET /books`
-- **Description:** Retrieves a list of all books in the library.
-- **Request Parameters:** None
-- **Example Request:**
-  ```
-  GET http://localhost:8080/books
-  ```
-- **Example Response:**
-  ```json
-  [
-      {
-          "id": 1,
-          "title": "The God of Small Things",
-          "author": "Arundhati Roy"
-      },
-      {
-          "id": 2,
-          "title": "Midnight's Children",
-          "author": "Salman Rushdie"
-      },
-  ]
+### 2. Navigate to the Project Directory
 
+cd Simple-Library-Project
 
-## Add a Book
-- **Endpoint:** `POST /books/add`
-- **Description:** Adds a new book to the library.
-- **Request Body:**
-  ```json
-  {
-      "title": "New Book Title",
-      "author": "Author Name"
-  }
+### 3. Install Dependencies
 
-**Example Request:**
+go mod tidy
 
-  POST http://localhost:8080/books/add
-  Content-Type: application/json
+### 4. PostgreSQL Database Setup
 
-  {
-      "title": "The Guide",
-      "author": "R. K. Narayan"
-  }
+### a. Install PostgreSQL
+If you haven't installed PostgreSQL, download and install it from here.
 
-**Example Response:**
-  ```json
-  {
-      "id": 7,
-      "title": "The Guide",
-      "author": "R. K. Narayan"
-  }
-  ```
+### b. Create Database
+Create a new database named readershaven:
+createdb readershaven
 
-## Update a Book
-- **Endpoint:** `PUT /books/update/{id}`
-- **Description:** Updates details of a book with the specified ID.
-- **Request Parameters:**
-  - `{id}`: ID of the book to update
-- **Request Body:**
-  ```json
-  {
-      "title": "Updated Title",
-      "author": "Updated Author"
-  }
-  
-**Example Request:**
+### c. Create Books Table
+Connect to the readershaven database and create a books table with the following schema:
 
-  PUT http://localhost:8080/books/update/6
-  Content-Type: application/json
+CREATE TABLE books (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255),
+    author VARCHAR(255),
+    published_date DATE
+);
 
-  {
-      "title": "Revised Title",
-      "author": "New Author"
-  }
+### 5. Connect PostgreSQL to Go Application
+Update the database connection string in main.go:
 
-**Example Response:**
-  ```json
-  {
-      "id": 6,
-      "title": "Revised Title",
-      "author": "New Author"
-  }
+Replace the line:
+db, err = sql.Open("postgres", "postgres://postgres:root@localhost/readershaven?sslmode=disable")
+with:
+db, err = sql.Open("postgres", "postgres://postgres:root@localhost/readershaven?sslmode=disable")
 
-## Delete a Book
-**Endpoint:** `DELETE /books/delete/{id}`
-**Description:** Deletes the book with the specified ID.
-**Request Parameters:**
-  - `{id}`: ID of the book to delete
-**Example Request:**
-  ```
-DELETE http://localhost:8080/books/delete/5
+### 6. Run the Application
 
-**Example Response:**
+go run main.go
+The server will start running at http://localhost:8080.
 
-Book with ID 5 deleted successfully
-  
+Base URL
+The base URL for accessing the API is http://localhost:8080.
+
+## Endpoints
+
+/books: GET (Get all books)
+/books/add: POST (Add a new book)
+/books/update/{id}: PUT (Update a book by ID)
+/books/delete/{id}: DELETE (Delete a book by ID)
 
 ## Status Codes
-- `200 OK`: Successful request
-- `201 Created`: Resource created successfully
-- `400 Bad Request`: Invalid request or request body
-- `404 Not Found`: Resource not found
-- `500 Internal Server Error`: Server error occurred
+
+200 OK: Successful request
+201 Created: Resource created
+400 Bad Request: Invalid request data or parameters
+404 Not Found: Resource not found
+500 Internal Server Error: Server error
 
 ## Error Responses
-- When an error occurs, the response body will contain an error message describing the issue.
+The API will respond with appropriate HTTP status codes and error messages in case of any errors.
 
 ## Rate Limiting
-This API does not impose any rate limiting restrictions.
+There's no rate limiting implemented in this API.
 
-## Pagination
-Pagination is not implemented in this version of the API.
+## Conclusion
 
-## Versioning
-This API does not currently support versioning.
+In this `README.md`:
 
-## Additional Notes
-- This API is designed for managing a simple library system.
-- Data is stored in memory and will be lost when the server is restarted.
+- Added steps to set up PostgreSQL and create the `books` table.
+- Updated the database connection string instruction in the setup steps.
+- Included endpoints and status codes information.
 
-This documentation outlines the endpoints, request/response formats, status codes, and additional information about the API.
+Make sure to update the connection string and any other placeholders with your actual details. This `README.md` provides a comprehensive guide to setting up and running your Go API with PostgreSQL.
