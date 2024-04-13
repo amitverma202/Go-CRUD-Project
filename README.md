@@ -1,6 +1,6 @@
 # Library Management API
 
-This API provides endpoints to manage a library system, allowing users to perform CRUD operations on books.
+This API provides endpoints to manage a Simple library management system, allowing users to perform CRUD operations on books.
 
 ## Setup
 
