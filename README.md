@@ -18,14 +18,14 @@ go mod tidy
 
 ### 4. PostgreSQL Database Setup
 
-## a. Install PostgreSQL
+### a. Install PostgreSQL
 If you haven't installed PostgreSQL, download and install it from here.
 
-## b. Create Database
+### b. Create Database
 Create a new database named readershaven:
 createdb readershaven
 
-## c. Create Books Table
+### c. Create Books Table
 Connect to the readershaven database and create a books table with the following schema:
 
 CREATE TABLE books (
@@ -51,14 +51,14 @@ The server will start running at http://localhost:8080.
 Base URL
 The base URL for accessing the API is http://localhost:8080.
 
-# Endpoints
+## Endpoints
 
 /books: GET (Get all books)
 /books/add: POST (Add a new book)
 /books/update/{id}: PUT (Update a book by ID)
 /books/delete/{id}: DELETE (Delete a book by ID)
 
-# Status Codes
+## Status Codes
 
 200 OK: Successful request
 201 Created: Resource created
@@ -66,13 +66,13 @@ The base URL for accessing the API is http://localhost:8080.
 404 Not Found: Resource not found
 500 Internal Server Error: Server error
 
-# Error Responses
+## Error Responses
 The API will respond with appropriate HTTP status codes and error messages in case of any errors.
 
-# Rate Limiting
+## Rate Limiting
 There's no rate limiting implemented in this API.
 
-# Conclusion
+## Conclusion
 
 In this `README.md`:
 
